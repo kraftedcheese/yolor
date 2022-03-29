@@ -392,7 +392,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
 
         # Check cache
         self.label_files = img2label_paths(self.img_files)  # labels
-        cache_path = str(Path(self.label_files[0]).parent) + '.cache3'  # cached labels
+        cache_path = str(Path(self.label_files[0]).parent)  # cached labels
         cache = self.cache_labels(cache_path)  # cache
 
         # Read cache
@@ -670,7 +670,7 @@ class LoadImagesAndLabels9(Dataset):  # for training/testing
 
         # Check cache
         self.label_files = img2label_paths(self.img_files)  # labels
-        cache_path = str(Path(self.label_files[0]).parent) + '.cache3'  # cached labels
+        cache_path = str(Path(self.label_files[0]).parent)  # cached labels
         cache = self.cache_labels(cache_path)  # cache
 
         # Read cache

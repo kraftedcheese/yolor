@@ -392,13 +392,8 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
 
         # Check cache
         self.label_files = img2label_paths(self.img_files)  # labels
-        cache_path = str(Path().resolve()) + 'labels.cache3'  # cached labels
-        if os.path.isfile(cache_path):
-            cache = torch.load(cache_path)  # load
-            if cache['hash'] != get_hash(self.label_files + self.img_files):  # dataset changed
-                cache = self.cache_labels(cache_path)  # re-cache
-        else:
-            cache = self.cache_labels(cache_path)  # cache
+        cache_path = str(Path(self.label_files[0]).parent) + '.cache3'  # cached labels
+        cache = self.cache_labels(cache_path)  # cache
 
         # Read cache
         cache.pop('hash')  # remove hash
@@ -532,7 +527,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
                 print('WARNING: Ignoring corrupted image and/or label %s: %s' % (img, e))
 
         x['hash'] = get_hash(self.label_files + self.img_files)
-        torch.save(x, path)  # save for next time
+        # torch.save(x, path)  # save for next time
         return x
 
     def __len__(self):
@@ -675,13 +670,8 @@ class LoadImagesAndLabels9(Dataset):  # for training/testing
 
         # Check cache
         self.label_files = img2label_paths(self.img_files)  # labels
-        cache_path = str(Path().resolve()) + 'labels.cache3'  # cached labels
-        if os.path.isfile(cache_path):
-            cache = torch.load(cache_path)  # load
-            if cache['hash'] != get_hash(self.label_files + self.img_files):  # dataset changed
-                cache = self.cache_labels(cache_path)  # re-cache
-        else:
-            cache = self.cache_labels(cache_path)  # cache
+        cache_path = str(Path(self.label_files[0]).parent) + '.cache3'  # cached labels
+        cache = self.cache_labels(cache_path)  # cache
 
         # Read cache
         cache.pop('hash')  # remove hash
@@ -815,7 +805,7 @@ class LoadImagesAndLabels9(Dataset):  # for training/testing
                 print('WARNING: Ignoring corrupted image and/or label %s: %s' % (img, e))
 
         x['hash'] = get_hash(self.label_files + self.img_files)
-        torch.save(x, path)  # save for next time
+        # torch.save(x, path)  # save for next time
         return x
 
     def __len__(self):
